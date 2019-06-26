@@ -327,7 +327,7 @@ void escrever_matrizC() {
     scanf("%s", arqC);
     fileout = fopen(arqC, "w");
     for (i = 0; i < A.linhas; i++) {
-      for (j = 0; j < B.colunas; j++) {
+      for (j = 0; j < A.colunas; j++) {
         fprintf(fileout, "%6.2f ", C.x[i][j]);
       }
       fprintf(fileout, "\n");
