@@ -13,7 +13,7 @@ int c = 0;
 struct matriz {
   int linhas;
   int colunas;
-  float x[5][5];
+  float h[5][5];
 };
 struct matriz A, B, C;
 
@@ -67,7 +67,7 @@ void aleatorio_matrizA() {
   } else {
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
-        A.x[i][j] = rand() % 100;
+        A.h[i][j] = rand() % 100;
 
       }
     }
@@ -84,7 +84,7 @@ void aleatorio_matrizB() {
   } else {
     for (i = 0; i < B.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
-        B.x[i][j] = rand() % 100;
+        B.h[i][j] = rand() % 100;
       }
     }
     printf("\nOperação concluída com sucesso!\n\n");
@@ -102,7 +102,7 @@ void manual_matrizA() {
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
         printf("\nInsira um valor para a posição (%d;%d) da matriz A: ", i, j);
-        scanf("%f", & A.x[i][j]);
+        scanf("%f", & A.h[i][j]);
       }
     }
     printf("\nOperacao concluída com sucesso!\n\n");
@@ -120,7 +120,7 @@ void manual_matrizB() {
     for (i = 0; i < B.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
         printf("\nInsira um valor para a posição (%d;%d) da matriz B: ", i, j);
-        scanf("%f", & B.x[i][j]);
+        scanf("%f", & B.h[i][j]);
       }
     }
     printf("\nOperacao concluída com sucesso!\n\n");
@@ -139,7 +139,7 @@ void soma() {
     if (A.colunas == B.colunas && A.linhas == B.linhas) {
       for (i = 0; i < A.linhas; i++) {
         for (j = 0; j < A.colunas; j++) {
-          C.x[i][j] = A.x[i][j] + B.x[i][j];
+          C.h[i][j] = A.h[i][j] + B.h[i][j];
         }
       }
       printf("\nOperação concluída com sucesso!\n\n");
@@ -161,7 +161,7 @@ void subtracao() {
     if (A.linhas == B.linhas && A.colunas == B.colunas) {
       for (i = 0; i < A.linhas; i++) {
         for (j = 0; j < A.colunas; j++) {
-          C.x[i][j] = A.x[i][j] - B.x[i][j];
+          C.h[i][j] = A.h[i][j] - B.h[i][j];
         }
       }
       printf("\nOperação concluída com sucesso!\n\n");
@@ -183,9 +183,9 @@ void multiplicacao() {
     if (A.colunas == B.linhas) {
       for (i = 0; i < A.linhas; i++) {
         for (j = 0; j < B.colunas; j++) {
-          C.x[i][j] = 0;
+          C.h[i][j] = 0;
           for (k = 0; k < A.linhas; k++) {
-            C.x[i][j] = C.x[i][j] + (A.x[i][k] * B.x[k][j]);
+            C.h[i][j] = C.h[i][j] + (A.h[i][k] * B.h[k][j]);
           }
         }
       }
@@ -208,7 +208,7 @@ void imprimir_matrizA() {
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
 
-        printf("%6.2f ", A.x[i][j]);
+        printf("%6.2f ", A.h[i][j]);
       }
       printf("\n\n");
     }
@@ -217,7 +217,7 @@ void imprimir_matrizA() {
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
 
-        printf("%6.2f ", A.x[i][j]);
+        printf("%6.2f ", A.h[i][j]);
       }
       printf("\n\n");
     }
@@ -235,7 +235,7 @@ void imprimir_matrizB() {
     printf("\n");
     for (i = 0; i < B.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
-        printf("%6.2f ", B.x[i][j]);
+        printf("%6.2f ", B.h[i][j]);
       }
       printf("\n\n");
     }
@@ -243,7 +243,7 @@ void imprimir_matrizB() {
     printf("\n");
     for (i = 0; i < B.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
-        printf("%6.2f ", B.x[i][j]);
+        printf("%6.2f ", B.h[i][j]);
 
       }
       printf("\n\n");
@@ -262,7 +262,7 @@ void imprimir_matrizC() {
     printf("\n");
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
-        printf("%6.2f ", C.x[i][j]);
+        printf("%6.2f ", C.h[i][j]);
       }
       printf("\n\n");
     }
@@ -282,7 +282,7 @@ void ler_matrizA() {
   while (!feof(fp)) {
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
-        fscanf(fp, "%f", & A.x[i][j]);
+        fscanf(fp, "%f", & A.h[i][j]);
       }
     }
   }
@@ -304,7 +304,7 @@ void ler_matrizB() {
   while (!feof(fp)) {
     for (i = 0; i < B.linhas; i++) {
       for (j = 0; j < B.colunas; j++) {
-        fscanf(fp, "%f", & B.x[i][j]);
+        fscanf(fp, "%f", & B.h[i][j]);
       }
     }
   }
@@ -328,7 +328,7 @@ void escrever_matrizC() {
     fileout = fopen(arqC, "w");
     for (i = 0; i < A.linhas; i++) {
       for (j = 0; j < A.colunas; j++) {
-        fprintf(fileout, "%6.2f ", C.x[i][j]);
+        fprintf(fileout, "%6.2f ", C.h[i][j]);
       }
       fprintf(fileout, "\n");
     }
@@ -344,7 +344,6 @@ int main() {
 
   //declaração de variável booleana 
   int aly = 0;
-  
   //laço para repetição do menu do usuário
   do {
 
