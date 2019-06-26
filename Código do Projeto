@@ -343,9 +343,9 @@ void escrever_matrizC() {
 int main() {
 
   //declaração de variável booleana 
-  int aly;
-  aly = 0;
-
+  int aly = 0;
+  
+  //laço para repetição do menu do usuário
   do {
 
     //declaração de variável para armazenamento
