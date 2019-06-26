@@ -1,0 +1,431 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//declaração de variáveis necessárias
+//para implementação das funções
+int a = 0;
+int b = 0;
+int c = 0;
+
+//declaração das variáveis de uma matriz 
+//por meio do uso de uma struct
+struct matriz {
+  int linhas;
+  int colunas;
+  float x[5][5];
+};
+struct matriz A, B, C;
+
+//declaração de variáveis para
+//indicar o preenchimento das matrizes 
+int PreencA = 0, PreencB = 0;
+
+//função responsável por comunicar-se com o
+//usuário para definir o tamanho da matriz A
+void tam_matrizA() {
+  printf("\nInsira a quantidade de linhas da matriz A(máximo de 5 linhas): ");
+  scanf("%d", & A.linhas);
+  if (A.linhas < 1 || A.linhas > 5) {
+    printf("Quantidade de linhas inválida!!!\n\n");
+  } else {
+    printf("Insira a quantidade de colunas da matriz A(máximo de 5 colunas): ");
+    scanf("%d", & A.colunas);
+    if (A.colunas < 1 || A.colunas > 5) {
+      printf("Quantidade de colunas inválida!!!\n\n");
+    } else {
+      printf("\nOperação concluída com sucesso!\n\n");
+      a = 1;
+    }
+  }
+}
+
+//função responsável por comunicar-se com o
+//usuário para definir o tamanho da matriz B
+void tam_matrizB() {
+  printf("\nInsira a quantidade de linhas da matriz B(máximo de 5 linhas): ");
+  scanf("%d", & B.linhas);
+  if (B.linhas < 1 || B.linhas > 5) {
+    printf("Quantidade de linhas inválida!!!\n\n");
+  } else {
+    printf("Insira a quantidade de colunas da matriz B(máximo de 5 colunas): ");
+    scanf("%d", & B.colunas);
+    if (B.colunas < 1 || B.colunas > 5) {
+      printf("Quantidade de colunas inválida!!!\n\n");
+    } else {
+      printf("\nOperação concluída com sucesso!\n\n");
+      b = 1;
+    }
+  }
+}
+
+//função responsável por fazer o preenchimento da matriz A //com números aleatórios caso o usuário solicite
+void aleatorio_matrizA() {
+  int i, j;
+  if (a == 0) {
+    printf("\nPrimeiro defina as dimesões da matriz A!!!\n\n");
+  } else {
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < A.colunas; j++) {
+        A.x[i][j] = rand() % 100;
+
+      }
+    }
+    printf("\nOperação concluída com sucesso!\n\n");
+    PreencA = 1;
+  }
+}
+
+//função responsável por fazer o preenchimento da matriz B //com números aleatórios caso o usuário solicite
+void aleatorio_matrizB() {
+  int i, j;
+  if (b == 0) {
+    printf("\nPrimeiro defina as dimesões da matriz B!!!\n\n");
+  } else {
+    for (i = 0; i < B.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        B.x[i][j] = rand() % 100;
+      }
+    }
+    printf("\nOperação concluída com sucesso!\n\n");
+    PreencB = 1;
+  }
+}
+
+//função responsável por comunicar-se com o usuário para
+//este fazer o preenchimento manual da matriz A
+void manual_matrizA() {
+  int i, j;
+  if (a == 0) {
+    printf("\nPrimeiro defina as dimesões da matriz A!!!\n\n");
+  } else {
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < A.colunas; j++) {
+        printf("\nInsira um valor para a posição (%d;%d) da matriz A: ", i, j);
+        scanf("%f", & A.x[i][j]);
+      }
+    }
+    printf("\nOperacao concluída com sucesso!\n\n");
+    PreencA = 1;
+  }
+}
+
+//função responsável por comunicar-se com o usuário para
+//este fazer o preenchimento manual da matriz B
+void manual_matrizB() {
+  int i, j;
+  if (b == 0) {
+    printf("\nPrimeiro defina as dimesões da matriz B!!!\n\n");
+  } else {
+    for (i = 0; i < B.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        printf("\nInsira um valor para a posição (%d;%d) da matriz B: ", i, j);
+        scanf("%f", & B.x[i][j]);
+      }
+    }
+    printf("\nOperacao concluída com sucesso!\n\n");
+    PreencB = 1;
+  }
+}
+
+//função responsável por fazer a soma aritmética
+//entre as matrizes A e B quando solicitado pelo usuário,
+//resultando em uma matriz C
+void soma() {
+  int i, j;
+  if ((PreencA == 0 && PreencB == 0) || (PreencB == 0 && PreencA == 1) || (PreencB == 1 && PreencA == 0)) {
+    printf("\nAo menos uma das matrizes não está preenchida!!!\n\n");
+  } else {
+    if (A.colunas == B.colunas && A.linhas == B.linhas) {
+      for (i = 0; i < A.linhas; i++) {
+        for (j = 0; j < A.colunas; j++) {
+          C.x[i][j] = A.x[i][j] + B.x[i][j];
+        }
+      }
+      printf("\nOperação concluída com sucesso!\n\n");
+      c = 1;
+    } else {
+      printf("\nAs matrizem apresentam dimensões diferentes!!!\n\n");
+    }
+  }
+}
+
+//função responsável por fazer a diferença aritmética
+//entre as matrizes A e B quando solicitado pelo usuário,
+//resultando em uma matriz C
+void subtracao() {
+  int i, j;
+  if ((PreencA == 0 && PreencB == 1) || (PreencA == 1 && PreencB == 0) || (PreencA == 0 && PreencB == 0)) {
+    printf("\nAo menos uma das matrizes não está preenchida!!!\n\n");
+  } else {
+    if (A.linhas == B.linhas && A.colunas == B.colunas) {
+      for (i = 0; i < A.linhas; i++) {
+        for (j = 0; j < A.colunas; j++) {
+          C.x[i][j] = A.x[i][j] - B.x[i][j];
+        }
+      }
+      printf("\nOperação concluída com sucesso!\n\n");
+      c = 1;
+    } else {
+      printf("\nAs matrizem apresentam dimensões diferentes!!!\n\n");
+    }
+  }
+}
+
+//função responsável por fazer o produto aritmético
+//entre as matrizes A e B quando solicitado pelo usuário,
+//resultando em uma matriz C
+void multiplicacao() {
+  int i, j, k;
+  if ((PreencA == 0 && PreencB == 1) || (PreencA == 1 && PreencB == 0) || (PreencA == 0 && PreencB == 0)) {
+    printf("\nAo menos uma das matrizes não está preenchida!!!\n\n");
+  } else {
+    if (A.colunas == B.linhas) {
+      for (i = 0; i < A.linhas; i++) {
+        for (j = 0; j < B.colunas; j++) {
+          C.x[i][j] = 0;
+          for (k = 0; k < A.linhas; k++) {
+            C.x[i][j] = C.x[i][j] + (A.x[i][k] * B.x[k][j]);
+          }
+        }
+      }
+      printf("\nOperacao concluída com sucesso!\n\n");
+      c = 1;
+    } else {
+      printf("\nAs matrizem apresentam dimensões diferentes!!!\n\n");
+    }
+  }
+}
+
+//função responsável por imprimir a matriz A
+//quando solicitado pelo usuário
+void imprimir_matrizA() {
+  int i, j;
+  if (PreencA == 0) {
+    printf("\nPreencha a matriz A!!!\n\n");
+  } else if (PreencA == 2) {
+    printf("\n");
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < A.colunas; j++) {
+
+        printf("%6.2f ", A.x[i][j]);
+      }
+      printf("\n\n");
+    }
+  } else {
+    printf("\n");
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < A.colunas; j++) {
+
+        printf("%6.2f ", A.x[i][j]);
+      }
+      printf("\n\n");
+    }
+    printf("\nOperacao concluída com sucesso!\n\n");
+  }
+}
+
+//função responsável por imprimir a matriz B
+//quando solicitado pelo usuário
+void imprimir_matrizB() {
+  int i, j;
+  if (PreencB == 0) {
+    printf("\nPreencha a matriz A!!!\n\n");
+  } else if (PreencB == 2) {
+    printf("\n");
+    for (i = 0; i < B.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        printf("%6.2f ", B.x[i][j]);
+      }
+      printf("\n\n");
+    }
+  } else {
+    printf("\n");
+    for (i = 0; i < B.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        printf("%6.2f ", B.x[i][j]);
+
+      }
+      printf("\n\n");
+    }
+    printf("\nOperacao concluída com sucesso!\n\n");
+  }
+}
+
+//função responsável por imprimir a matriz C
+//quando solicitado pelo usuário
+void imprimir_matrizC() {
+  int i, j;
+  if (c == 0) {
+    printf("\nNão foi efetuada nenhuma operação entre as matrizes A e B!!!\n\n");
+  } else {
+    printf("\n");
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        printf("%6.2f ", C.x[i][j]);
+      }
+      printf("\n\n");
+    }
+    printf("\nOperacao concluída com sucesso!\n\n");
+  }
+}
+
+//função responsável por ler a matriz A
+//a partir de um arquivo inserido pelo usuário
+void ler_matrizA() {
+  int i, j;
+  char arqA[20];
+  FILE * fp;
+  printf("\nInsira o endereco do arquivo desejado: ");
+  scanf("%s", arqA);
+  fp = fopen(arqA, "r");
+  while (!feof(fp)) {
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < A.colunas; j++) {
+        fscanf(fp, "%f", & A.x[i][j]);
+      }
+    }
+  }
+  printf("\nOperação concluída com sucesso!\n\n");
+  a = 1;
+  PreencA = 1;
+  fclose(fp);
+}
+
+//função responsável por ler a matriz B
+//a partir de um arquivo inserido pelo usuário
+void ler_matrizB() {
+  int i, j;
+  char arqB[20];
+  FILE * fp;
+  printf("\nInsira o endereco do arquivo desejado: ");
+  scanf("%s", arqB);
+  fp = fopen(arqB, "r");
+  while (!feof(fp)) {
+    for (i = 0; i < B.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        fscanf(fp, "%f", & B.x[i][j]);
+      }
+    }
+  }
+  printf("\nOperação concluída com sucesso!\n\n");
+  b = 1;
+  PreencB = 1;
+  fclose(fp);
+}
+
+//função responsável por escrever a matriz C
+//em um arquivo quando solicitado pelo usuário
+void escrever_matrizC() {
+  int i, j;
+  char arqC[20];
+  FILE * fileout;
+  if (c == 0) {
+    printf("\nNão foi efetuada nenhuma operação entre as matrizes A e B!!!\n\n");
+  } else {
+    printf("\nInsira o endereco do arquivo desejado: ");
+    scanf("%s", arqC);
+    fileout = fopen(arqC, "w");
+    for (i = 0; i < A.linhas; i++) {
+      for (j = 0; j < B.colunas; j++) {
+        fprintf(fileout, "%6.2f ", C.x[i][j]);
+      }
+      fprintf(fileout, "\n");
+    }
+    printf("\nOperação concluída com sucesso!\n\n");
+    fclose(fileout);
+  }
+}
+
+//função principal do projeto responsável por gerar
+//o menu e comunicar-se com o usuário através de uma
+//lógica utilizando a função 'switch case'
+int main() {
+
+  //declaração de variável booleana 
+  int aly;
+  aly = 0;
+
+  do {
+
+    //declaração de variável para armazenamento
+    //da operação escolhida pelo usuário
+    int sson;
+
+    printf("PROGRAMA DE MANIPULACAO DE MATRIZES\n"
+      " (1) Definir o tamanho da matriz A\n"
+      " (2) Definir o tamanho da matriz B\n"
+      " (3) Preencher a matriz A com valores aleatórios\n"
+      " (4) Preencher a matriz B com valores aleatórios\n"
+      " (5) Atribuir valores manualmente para os elementos da matriz A\n"
+      " (6) Atribuir valores manualmente para os elementos da matriz B\n"
+      " (7) Calcular A+B\n"
+      " (8) Calcular A-B\n"
+      " (9) Calcular A*B\n"
+      "(10) Imprimir matriz A\n"
+      "(11) Imprimir matriz B\n"
+      "(12) Imprimir matriz C\n"
+      "(13) Ler a matriz A de um arquivo\n"
+      "(14) Ler a matriz B de um arquivo\n"
+      "(15) Escrever a matriz C em um arquivo\n"
+      "(16) Sair\n"
+      "digite sua operacao: ");
+    scanf("%d", & sson);
+
+    switch (sson) {
+    case 1:
+      tam_matrizA();
+      break;
+    case 2:
+      tam_matrizB();
+      break;
+    case 3:
+      aleatorio_matrizA();
+      break;
+    case 4:
+      aleatorio_matrizB();
+      break;
+    case 5:
+      manual_matrizA();
+      break;
+    case 6:
+      manual_matrizB();
+      break;
+    case 7:
+      soma();
+      break;
+    case 8:
+      subtracao();
+      break;
+    case 9:
+      multiplicacao();
+      break;
+    case 10:
+      imprimir_matrizA();
+      break;
+    case 11:
+      imprimir_matrizB();
+      break;
+    case 12:
+      imprimir_matrizC();
+      break;
+    case 13:
+      ler_matrizA();
+      break;
+    case 14:
+      ler_matrizB();
+      break;
+    case 15:
+      escrever_matrizC();
+      break;
+    case 16:
+      printf("\nO programa foi finalizado!\n\n");
+      aly = 1;
+      break;
+    default:
+      printf("\nOperação sem correspondência!!!\n\n");
+      break;
+    }
+  } while (aly == 0);
+  return 0;
+}
